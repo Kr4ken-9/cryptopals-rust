@@ -83,3 +83,25 @@ pub fn xor(first_bytes: Vec<u8>, second_bytes: Vec<u8>) -> Vec<u8> {
     }
     return output;
 }
+
+struct Pair {
+    output: str,
+    score: i32
+}
+
+pub fn score(bytes: Vec<u8>) -> Vec<Pair> {
+    let mut output: Vec<Pair> = Vec::with_capacity(bytes.len());
+    let keys:&str = "`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:\"ZXCVBNM<>?";
+    
+    for key in keys {
+        let mut score:i32 = 0;
+        let byte_key:Vec<u8> = hex_to_bytes(value_to_hex(key as u8));
+        
+        let result:Vec<u8> = xor(bytes, byte_key);
+        let hex_result = bytes_to_hex(result);
+        
+        for character in hex_result {
+            let upper_character:str = character.to_uppercase().collect::<Vec<_>>();
+        }
+    }
+}
