@@ -66,7 +66,7 @@ pub fn bytes_to_base64(bytes: Vec<u8>) -> String {
                     52...61 => (current_base64 - 4) as char,
                     62 => '+',
                     63 => '/',
-                    _ => panic!("Technicalities"),
+                    _ => panic!("Technicalities")
                 };
                 base_64.push(char_value);
                 current_bit = 0;
@@ -91,7 +91,7 @@ struct Pair {
 
 pub fn score(bytes: Vec<u8>) -> Vec<Pair> {
     let mut output: Vec<Pair> = Vec::with_capacity(bytes.len());
-    let keys:&str = "`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:\"ZXCVBNM<>?";
+    let keys:str = "`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:\"ZXCVBNM<>?";
     
     for key in keys {
         let mut score:i32 = 0;
@@ -102,6 +102,13 @@ pub fn score(bytes: Vec<u8>) -> Vec<Pair> {
         
         for character in hex_result {
             let upper_character:str = character.to_uppercase().collect::<Vec<_>>();
+            
+            match upper_character {
+                "E" | "T" | "A" | "O" | "I" | "N" | "S" | "H" | "R" | "D" | "L" | "U" => score += 1,
+                _ => panic!("Technicalities")
+            }
         }
+        
+        output.push(Pair { hex_result, score });
     }
 }
